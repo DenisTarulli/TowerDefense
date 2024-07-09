@@ -7,10 +7,14 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int waypointIndex;
+    private float lifeTime;
+
+    public float LifeTime { get => lifeTime; }
 
     private void Awake()
     {
         waypointIndex = 0;
+        lifeTime = 0f;
     }
 
     private void Start()
@@ -24,6 +28,8 @@ public class EnemyMovement : MonoBehaviour
         moveDirection.Normalize();
 
         transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
+
+        lifeTime += Time.deltaTime * moveSpeed;
 
         if (Vector3.Distance(transform.position, target.position) < distanceToPointTolerance)
         {
