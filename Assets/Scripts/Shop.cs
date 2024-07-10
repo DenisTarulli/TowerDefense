@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
+    [SerializeField] private TurretScriptableObject standardTurret;
+    [SerializeField] private TurretScriptableObject missileLauncherTurret;
+    [SerializeField] private TurretScriptableObject laserTurret;
+
     private BuildManager buildManager;
 
     private void Start()
@@ -9,18 +13,18 @@ public class Shop : MonoBehaviour
         buildManager = BuildManager.Instance;
     }
 
-    public void PurchaseStandardTurret()
+    public void SelectStandardTurret()
     {
-        buildManager.SetTurretToBuild(buildManager.standardTurretPrefab);
+        buildManager.SelectTurretToBuild(standardTurret);
     }
 
-    public void PurchaseMissileLauncherTurret()
+    public void SelectMissileLauncherTurret()
     {
-        buildManager.SetTurretToBuild(buildManager.missileLauncherTurretPrefab);
+        buildManager.SelectTurretToBuild(missileLauncherTurret);
     }
 
-    public void PurchaseLaserTurret()
+    public void SelectLaserTurret()
     {
-        buildManager.SetTurretToBuild(buildManager.laserTurretPrefab);
+        buildManager.SelectTurretToBuild(laserTurret);
     }
 }

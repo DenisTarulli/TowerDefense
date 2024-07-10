@@ -4,11 +4,7 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance { get; private set; }
 
-    public GameObject standardTurretPrefab;
-    public GameObject missileLauncherTurretPrefab;
-    public GameObject laserTurretPrefab;
-
-    private GameObject turretToBuild;
+    private TurretScriptableObject turretToBuild;
 
     private void Awake()
     {
@@ -18,14 +14,27 @@ public class BuildManager : MonoBehaviour
             DestroyImmediate(gameObject);
     }
 
-    public GameObject GetTurretToBuild()
-    {
-        return turretToBuild;
-    }
+    public bool CanBuild { get => turretToBuild != null; }
 
-    public void SetTurretToBuild(GameObject turret)
+    public void SelectTurretToBuild(TurretScriptableObject turret)
     {
         turretToBuild = turret;
+    }
+
+    public void BuildTurretOn(Node node)
+    {
+        if (PlayerStats.Money < turretToBuild.cost)
+        {
+            Debug.Log("You don't have enough money");
+            return;
+        }
+
+        PlayerStats.Money -= turretToBuild.cost;
+
+        GameObject turret = Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        node.turret = turret;
+
+        Debug.Log($"${PlayerStats.Money}");
     }
 
     private void OnDestroy()

@@ -7,23 +7,32 @@ public class Node : MonoBehaviour
     private Color startingColor;
 
     [SerializeField] private float yPositionOffset;
+    private Vector3 positionOffset;
 
-    private GameObject turret;
+    [Header("Optional")]
+    public GameObject turret;
+
     private MeshRenderer meshRend;
     private BuildManager buildManager;
-
 
     private void Start()
     {
         meshRend = GetComponent<MeshRenderer>();
         startingColor = meshRend.material.color;
 
+        positionOffset = new(0f, yPositionOffset, 0f);
+
         buildManager = BuildManager.Instance;
+    }
+
+    public Vector3 GetBuildPosition()
+    {
+        return transform.position + positionOffset;
     }
 
     private void OnMouseDown()
     {
-        if (buildManager.GetTurretToBuild() == null || EventSystem.current.IsPointerOverGameObject()) return;
+        if (!buildManager.CanBuild || EventSystem.current.IsPointerOverGameObject()) return;
 
         if (turret != null)
         {
@@ -31,14 +40,12 @@ public class Node : MonoBehaviour
             return;
         }
 
-        GameObject turretToBuild = BuildManager.Instance.GetTurretToBuild();
-
-        turret = Instantiate(turretToBuild, transform.position + new Vector3(0f, yPositionOffset, 0f), transform.rotation);
+        buildManager.BuildTurretOn(this);
     }
 
     private void OnMouseEnter()
     {
-        if (buildManager.GetTurretToBuild() == null || EventSystem.current.IsPointerOverGameObject()) return;
+        if (!buildManager.CanBuild || EventSystem.current.IsPointerOverGameObject()) return;
 
         meshRend.material.color = hoverColor;
     }
