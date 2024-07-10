@@ -4,6 +4,9 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance { get; private set; }
 
+    [SerializeField] private GameObject buildEffect;
+    [SerializeField] private float buildEffectDuration;
+
     private TurretScriptableObject turretToBuild;
 
     private void Awake()
@@ -15,6 +18,7 @@ public class BuildManager : MonoBehaviour
     }
 
     public bool CanBuild { get => turretToBuild != null; }
+    public bool HasEnoughMoney { get => PlayerStats.Money >= turretToBuild.cost; }
 
     public void SelectTurretToBuild(TurretScriptableObject turret)
     {
@@ -31,8 +35,13 @@ public class BuildManager : MonoBehaviour
 
         PlayerStats.Money -= turretToBuild.cost;
 
-        GameObject turret = Instantiate(turretToBuild.prefab, node.GetBuildPosition(), Quaternion.identity);
+        Vector3 buildPosition = node.GetBuildPosition();
+
+        GameObject turret = Instantiate(turretToBuild.prefab, buildPosition, Quaternion.identity);
         node.turret = turret;
+
+        GameObject buildParticles = Instantiate(buildEffect, buildPosition, Quaternion.identity);
+        Destroy(buildParticles, buildEffectDuration);
 
         Debug.Log($"${PlayerStats.Money}");
     }

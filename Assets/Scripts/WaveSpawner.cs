@@ -26,7 +26,7 @@ public class WaveSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
         if (countdown >= 0f)
-            waveCountdownText.text = $"{Mathf.CeilToInt(countdown):D2}";
+            waveCountdownText.text = $"Next wave in: {Mathf.CeilToInt(countdown):D2}";
     }
 
     private IEnumerator SpawnWave()
