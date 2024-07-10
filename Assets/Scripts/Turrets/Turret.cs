@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class StandardTurret : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     [Header("Attributes")]
     [SerializeField] private float range;

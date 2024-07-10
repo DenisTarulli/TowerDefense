@@ -4,7 +4,10 @@ public class BuildManager : MonoBehaviour
 {
     public static BuildManager Instance { get; private set; }
 
-    [SerializeField] private GameObject standardTurretPrefab;
+    public GameObject standardTurretPrefab;
+    public GameObject missileLauncherTurretPrefab;
+    public GameObject laserTurretPrefab;
+
     private GameObject turretToBuild;
 
     private void Awake()
@@ -15,14 +18,14 @@ public class BuildManager : MonoBehaviour
             DestroyImmediate(gameObject);
     }
 
-    private void Start()
-    {
-        turretToBuild = standardTurretPrefab;
-    }
-
     public GameObject GetTurretToBuild()
     {
         return turretToBuild;
+    }
+
+    public void SetTurretToBuild(GameObject turret)
+    {
+        turretToBuild = turret;
     }
 
     private void OnDestroy()
