@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     private Transform target;
 
     [SerializeField] private float speed;
+    [SerializeField] private int damage;
     [SerializeField] private float explosionRadius;
     [SerializeField] private GameObject hitParticles;
     [SerializeField] private float hitParticlesDuration;
@@ -20,7 +21,15 @@ public class Bullet : MonoBehaviour
     {
         if (target == null)
         {
-            Destroy(gameObject);
+            if (explosionRadius > 0f)
+            {
+                HitEffect();
+                Explode();
+                Destroy(gameObject);
+            }
+            else
+                Destroy(gameObject);
+
             return;
         }
 
@@ -39,8 +48,7 @@ public class Bullet : MonoBehaviour
 
     private void HitTarget()
     {
-        GameObject hitEffect = Instantiate(hitParticles, transform.position, Quaternion.identity);
-        Destroy(hitEffect, hitParticlesDuration);
+        HitEffect();        
 
         if (explosionRadius > 0f)
         {
@@ -54,9 +62,16 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Damage(Transform enemy)
+    private void HitEffect()
     {
-        Destroy(enemy.gameObject);
+        GameObject hitEffect = Instantiate(hitParticles, transform.position, Quaternion.identity);
+        Destroy(hitEffect, hitParticlesDuration);
+    }
+
+    private void Damage(Transform enemy)
+    {        
+        if (enemy.TryGetComponent<EnemyMovement>(out var enemyScript))
+            enemyScript.TakeDamage(damage);
     }
 
     private void Explode()

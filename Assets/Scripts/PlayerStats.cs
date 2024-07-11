@@ -8,8 +8,12 @@ public class PlayerStats : MonoBehaviour
     public static int Money;
     [SerializeField] private int startingMoney;
 
+    public static int Lives;
+    [SerializeField] private int startingLives;
+
     private void Start()
     {
         Money = startingMoney;
+        Lives = startingLives;
     }
 }

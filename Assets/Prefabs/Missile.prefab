@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 45
+  damage: 50
   explosionRadius: 6
   hitParticles: {fileID: 1938147839470190717, guid: 15bf7fe20b76ccd41a217ec9674666d4,
     type: 3}

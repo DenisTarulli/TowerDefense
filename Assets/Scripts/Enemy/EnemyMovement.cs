@@ -4,6 +4,10 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float distanceToPointTolerance;
+    [SerializeField] private int health;
+    [SerializeField] private int moneyDrop;
+    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private float deathEffectDuration;
 
     private Transform target;
     private int waypointIndex;
@@ -41,12 +45,38 @@ public class EnemyMovement : MonoBehaviour
     private void GetNextWaypoint()
     {
         if (waypointIndex == Waypoints.points.Length - 1)
+        {
+            EndPath();
             Destroy(gameObject);
+        }
         else
         {
             waypointIndex++;
 
             target = Waypoints.points[waypointIndex];
         }        
+    }
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        PlayerStats.Money += moneyDrop;
+        
+        GameObject deathParticles = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(deathParticles, deathEffectDuration);
+
+        Destroy(gameObject);
+    }
+
+    private void EndPath()
+    {
+        PlayerStats.Lives--;
     }
 }
