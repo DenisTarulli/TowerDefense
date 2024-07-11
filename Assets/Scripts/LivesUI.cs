@@ -12,6 +12,6 @@ public class LivesUI : MonoBehaviour
 
     private void Update()
     {
-        livesText.text = $"<3 {PlayerStats.Lives:D2}";
+        livesText.text = $"LIVES: {PlayerStats.Lives:D2}";
     }
 }

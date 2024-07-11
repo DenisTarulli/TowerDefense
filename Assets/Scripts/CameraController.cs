@@ -32,9 +32,20 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.GameIsOver)
+        {
+            RecenterCamera();
+            this.enabled = false;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            RecenterCamera();
+        }
+
         ToggleMovement();
         CameraMovement();
-        RecenterCamera();
         CameraZoom();
     }
 
@@ -69,12 +80,9 @@ public class CameraController : MonoBehaviour
 
     private void RecenterCamera()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            transform.position = centerPosition;
-            orthographicSize = startingOrthoSize;
-            virtualCamera.m_Lens.OrthographicSize = startingOrthoSize;
-        }
+        transform.position = centerPosition;
+        orthographicSize = startingOrthoSize;
+        virtualCamera.m_Lens.OrthographicSize = startingOrthoSize;
     }
 
     private void ToggleMovement()

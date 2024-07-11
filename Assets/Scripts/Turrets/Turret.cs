@@ -72,6 +72,9 @@ public class Turret : MonoBehaviour
         float distanceToEnemy = Mathf.Infinity;
         GameObject firstEnemy = null;
 
+        if (useLaser && target != null &&
+            Vector3.Distance(transform.position, target.position) <= range) return;
+
         foreach (GameObject enemy in enemies)
         {
             float lifeTime = enemy.GetComponent<Enemy>().LifeTime;

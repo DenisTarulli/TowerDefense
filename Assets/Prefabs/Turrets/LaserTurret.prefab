@@ -165,7 +165,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   fireRate: 0
   damageOverTime: 15
-  slowAmount: 0.3
+  slowAmount: 0.45
   useLaser: 1
   impactEffect: {fileID: 1130339231682174592}
   partToRotate: {fileID: 5985281240182947453}

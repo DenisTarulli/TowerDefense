@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool gameIsOver = false;
+    public static bool GameIsOver;
+
+    [SerializeField] private GameObject gameOverUI;
+
+    private void Awake()
+    {
+        GameIsOver = false;
+    }
 
     private void Update()
     {
-        if (gameIsOver)
+        if (GameIsOver)
             return;
+
+        if (Input.GetKeyDown(KeyCode.T))
+            GameOver();
 
         if (PlayerStats.Lives <= 0)
         {
@@ -19,7 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        gameIsOver = true;
-        Debug.Log("Game Over");
+        GameIsOver = true;
+
+        gameOverUI.SetActive(true);
     }
 }
