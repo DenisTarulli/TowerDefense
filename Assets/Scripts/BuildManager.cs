@@ -42,8 +42,6 @@ public class BuildManager : MonoBehaviour
 
         GameObject buildParticles = Instantiate(buildEffect, buildPosition, Quaternion.identity);
         Destroy(buildParticles, buildEffectDuration);
-
-        Debug.Log($"${PlayerStats.Money}");
     }
 
     private void OnDestroy()

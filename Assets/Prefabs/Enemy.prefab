@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfc2c70370a7ae48a8088e62c504684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 15
   distanceToPointTolerance: 0.05
   health: 100
   moneyDrop: 35

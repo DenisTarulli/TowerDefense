@@ -1901,7 +1901,7 @@ MonoBehaviour:
   standardTurret: {fileID: 11400000, guid: efba93c0bc08cb14c88f29d7dcd6a7fa, type: 2}
   missileLauncherTurret: {fileID: 11400000, guid: 2b20cafb117f6ea44a3bb772f07e034d,
     type: 2}
-  laserTurret: {fileID: 0}
+  laserTurret: {fileID: 11400000, guid: e7ae03c7f772660408eaaf5a08620228, type: 2}
 --- !u!1001 &112341007
 PrefabInstance:
   m_ObjectHideFlags: 0
