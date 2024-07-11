@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
 
     private void Damage(Transform enemy)
     {        
-        if (enemy.TryGetComponent<EnemyMovement>(out var enemyScript))
+        if (enemy.TryGetComponent<Enemy>(out var enemyScript))
             enemyScript.TakeDamage(damage);
     }
 

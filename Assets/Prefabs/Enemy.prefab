@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 440640872189709942}
   - component: {fileID: 8972057143155220105}
   - component: {fileID: 738518230406718863}
+  - component: {fileID: 3616615519792046788}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -118,10 +119,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfc2c70370a7ae48a8088e62c504684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  distanceToPointTolerance: 0.05
+  startingSpeed: 15
   health: 100
-  moneyDrop: 35
+  moneyDropped: 30
   deathEffect: {fileID: 2092821897194101133, guid: cd7c15225f07d754b8ea22df325fa5f9,
     type: 3}
   deathEffectDuration: 2
+--- !u!114 &3616615519792046788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5490609021692091065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21aeefad2f8c9a443a0103ab58735e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToPointTolerance: 0.01

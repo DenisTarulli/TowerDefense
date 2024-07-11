@@ -1,45 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float distanceToPointTolerance;
-    [SerializeField] private int health;
-    [SerializeField] private int moneyDrop;
-    [SerializeField] private GameObject deathEffect;
-    [SerializeField] private float deathEffectDuration;
-
     private Transform target;
     private int waypointIndex;
-    private float lifeTime;
 
-    public float LifeTime { get => lifeTime; }
+    private Enemy enemy;
+
+    [SerializeField] private float distanceToPointTolerance;
 
     private void Awake()
     {
         waypointIndex = 0;
-        lifeTime = 0f;
     }
 
     private void Start()
     {
+        enemy = GetComponent<Enemy>();
+
         target = Waypoints.points[waypointIndex];
     }
 
     private void Update()
     {
+        Movement();
+    }
+
+    private void Movement()
+    {
         Vector3 moveDirection = target.position - transform.position;
         moveDirection.Normalize();
 
-        transform.Translate(moveSpeed * Time.deltaTime * moveDirection);
-
-        lifeTime += Time.deltaTime * moveSpeed;
+        transform.Translate(enemy.MoveSpeed * Time.deltaTime * moveDirection);
 
         if (Vector3.Distance(transform.position, target.position) < distanceToPointTolerance)
         {
             transform.position = target.position;
             GetNextWaypoint();
         }
+
+        enemy.MoveSpeed = enemy.StartingSpeed;
     }
 
     private void GetNextWaypoint()
@@ -54,29 +57,12 @@ public class EnemyMovement : MonoBehaviour
             waypointIndex++;
 
             target = Waypoints.points[waypointIndex];
-        }        
-    }
-
-    public void TakeDamage(int amount)
-    {
-        health -= amount;
-
-        if (health <= 0)
-            Die();
-    }
-
-    private void Die()
-    {
-        PlayerStats.Money += moneyDrop;
-        
-        GameObject deathParticles = Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(deathParticles, deathEffectDuration);
-
-        Destroy(gameObject);
+        }
     }
 
     private void EndPath()
     {
         PlayerStats.Lives--;
+        Destroy(gameObject);
     }
 }

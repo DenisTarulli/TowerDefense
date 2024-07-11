@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LaserTurret
   m_EditorClassIdentifier: 
   prefab: {fileID: 567465316471126224, guid: cfb4052abbcd9cb4f866b56d6ec34fcf, type: 3}
-  cost: 375
+  cost: 350

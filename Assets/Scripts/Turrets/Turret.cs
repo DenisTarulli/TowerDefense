@@ -11,6 +11,8 @@ public class Turret : MonoBehaviour
     private float nextTimeToShoot;
 
     [Header("Use Laser")]
+    [SerializeField] private int damageOverTime;
+    [SerializeField] private float slowAmount;
     [SerializeField] private bool useLaser = false;
     [SerializeField] private ParticleSystem impactEffect;
     private Light impactLight;
@@ -21,7 +23,9 @@ public class Turret : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float searchTargetRepeatRate;
+
     private Transform target;
+    private Enemy targetEnemy;
 
     private const string IS_ENEMY = "Enemy";
 
@@ -70,7 +74,7 @@ public class Turret : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
         {
-            float lifeTime = enemy.GetComponent<EnemyMovement>().LifeTime;
+            float lifeTime = enemy.GetComponent<Enemy>().LifeTime;
 
             if (lifeTime > longestLifeTime)
             {
@@ -87,6 +91,7 @@ public class Turret : MonoBehaviour
         if (firstEnemy != null && distanceToEnemy <= range)
         {
             target = firstEnemy.transform;
+            targetEnemy = firstEnemy.GetComponent<Enemy>();
         }
         else 
             target = null;
@@ -103,6 +108,9 @@ public class Turret : MonoBehaviour
 
     private void Laser()
     {
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
@@ -114,10 +122,8 @@ public class Turret : MonoBehaviour
         lineRenderer.SetPosition(1, target.position);
 
         Vector3 direction = firePoint.position - target.position;
-
-        impactEffect.transform.rotation = Quaternion.LookRotation(direction);
-
-        impactEffect.transform.position = target.position + direction.normalized * 1.25f;
+        
+        impactEffect.transform.SetPositionAndRotation(target.position + direction.normalized * 1.25f, Quaternion.LookRotation(direction));
     }
 
     private void Shoot()
