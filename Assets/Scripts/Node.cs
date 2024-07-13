@@ -10,9 +10,10 @@ public class Node : MonoBehaviour
 
     [SerializeField] private float yPositionOffset;
     private Vector3 positionOffset;
-
-    [Header("Optional")]
-    public GameObject turret;
+    
+    [HideInInspector] public GameObject turret;
+    [HideInInspector] public TurretScriptableObject currentTurret;
+    [HideInInspector] public bool isUpgraded;
 
     private MeshRenderer meshRend;
     private BuildManager buildManager;
@@ -62,8 +63,38 @@ public class Node : MonoBehaviour
         GameObject newTurret = Instantiate(turretToBuild.prefab, buildPosition, Quaternion.identity);
         turret = newTurret;
 
+        currentTurret = turretToBuild;
+
         GameObject buildParticles = Instantiate(turretToBuild.buildEffect, buildPosition, Quaternion.identity);
         Destroy(buildParticles, turretToBuild.buildEffectDuration);
+    }
+
+    public void UpgradeTurret()
+    {
+        if (PlayerStats.Money < currentTurret.upgradeCost)
+        {
+            Debug.Log("You don't have enough money to upgrade");
+            return;
+        }
+
+        PlayerStats.Money -= currentTurret.upgradeCost;
+
+        Vector3 buildPosition = GetBuildPosition();
+        Quaternion lastLookRotation = turret.GetComponent<Turret>().PartToRotate.rotation;
+
+        Destroy(turret);
+
+        GameObject newTurret = Instantiate(currentTurret.upgradedPrefab, buildPosition, Quaternion.identity);
+        turret = newTurret;
+
+        turret.GetComponent<Turret>().PartToRotate.rotation = lastLookRotation;
+
+        GameObject buildParticles = Instantiate(currentTurret.upgradeEffect, buildPosition, Quaternion.identity);
+        Destroy(buildParticles, currentTurret.upgradeEffectDuration);
+
+        isUpgraded = true;
+
+        Debug.Log("Turret upgraded!");
     }
 
     private void OnMouseEnter()

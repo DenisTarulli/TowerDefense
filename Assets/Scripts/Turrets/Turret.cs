@@ -27,6 +27,8 @@ public class Turret : MonoBehaviour
     private Transform target;
     private Enemy targetEnemy;
 
+    public Transform PartToRotate { get => partToRotate; set => partToRotate = value; }
+
     private const string IS_ENEMY = "Enemy";
 
     private void Start()

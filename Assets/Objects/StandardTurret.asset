@@ -13,4 +13,13 @@ MonoBehaviour:
   m_Name: StandardTurret
   m_EditorClassIdentifier: 
   prefab: {fileID: 5946176720376625715, guid: 7018dd92d0a736d479d9f6a4a0a9e7f7, type: 3}
+  upgradedPrefab: {fileID: 5946176720376625715, guid: cd4e2dfc207c0894faec6d6d65843e9c,
+    type: 3}
   cost: 100
+  upgradeCost: 250
+  buildEffect: {fileID: 6063829799591612389, guid: a411ccf69e88a8a4184fb25532c61ce0,
+    type: 3}
+  buildEffectDuration: 1
+  upgradeEffect: {fileID: 6063829799591612389, guid: 1b3fff5e0788b374194afb6abe730bdf,
+    type: 3}
+  upgradeEffectDuration: 1
