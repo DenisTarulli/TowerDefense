@@ -8,6 +8,8 @@ public class BuildManager : MonoBehaviour
     [SerializeField] private float buildEffectDuration;
 
     private TurretScriptableObject turretToBuild;
+    private Node selectedNode;
+    [SerializeField] private NodeUI nodeUI;
 
     private void Awake()
     {
@@ -20,28 +22,36 @@ public class BuildManager : MonoBehaviour
     public bool CanBuild { get => turretToBuild != null; }
     public bool HasEnoughMoney { get => PlayerStats.Money >= turretToBuild.cost; }
 
-    public void SelectTurretToBuild(TurretScriptableObject turret)
+    public void SelectNode(Node node)
     {
-        turretToBuild = turret;
-    }
-
-    public void BuildTurretOn(Node node)
-    {
-        if (PlayerStats.Money < turretToBuild.cost)
+        if (node == selectedNode)
         {
-            Debug.Log("You don't have enough money");
+            DeselectNode();
             return;
         }
 
-        PlayerStats.Money -= turretToBuild.cost;
+        selectedNode = node;
+        turretToBuild = null;
 
-        Vector3 buildPosition = node.GetBuildPosition();
+        nodeUI.SetTarget(node);
+    }
 
-        GameObject turret = Instantiate(turretToBuild.prefab, buildPosition, Quaternion.identity);
-        node.turret = turret;
+    public void DeselectNode()
+    {
+        selectedNode = null;
+        nodeUI.Hide();
+    }
 
-        GameObject buildParticles = Instantiate(buildEffect, buildPosition, Quaternion.identity);
-        Destroy(buildParticles, buildEffectDuration);
+    public void SelectTurretToBuild(TurretScriptableObject turret)
+    {
+        turretToBuild = turret;
+
+        DeselectNode();
+    }
+
+    public TurretScriptableObject GetTurretToBuild()
+    {
+        return turretToBuild;
     }
 
     private void OnDestroy()

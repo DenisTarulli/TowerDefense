@@ -4,5 +4,7 @@ using UnityEngine;
 public class TurretScriptableObject : ScriptableObject
 {
     public GameObject prefab;
+    public GameObject buildEffect;
+    public float buildEffectDuration;
     public int cost;
 }

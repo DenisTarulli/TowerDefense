@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -33,15 +34,36 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!buildManager.CanBuild || EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
         if (turret != null)
         {
-            Debug.Log("There is a turret already");
+            buildManager.SelectNode(this);
             return;
         }
 
-        buildManager.BuildTurretOn(this);
+        if (!buildManager.CanBuild) return;
+
+        BuildTurret(buildManager.GetTurretToBuild());
+    }
+
+    private void BuildTurret(TurretScriptableObject turretToBuild)
+    {
+        if (PlayerStats.Money < turretToBuild.cost)
+        {
+            Debug.Log("You don't have enough money");
+            return;
+        }
+
+        PlayerStats.Money -= turretToBuild.cost;
+
+        Vector3 buildPosition = GetBuildPosition();
+
+        GameObject newTurret = Instantiate(turretToBuild.prefab, buildPosition, Quaternion.identity);
+        turret = newTurret;
+
+        GameObject buildParticles = Instantiate(turretToBuild.buildEffect, buildPosition, Quaternion.identity);
+        Destroy(buildParticles, turretToBuild.buildEffectDuration);
     }
 
     private void OnMouseEnter()
