@@ -10,10 +10,13 @@ public class TurretScriptableObject : ScriptableObject
     [Header("Prices")]
     public int cost;
     public int upgradeCost;
+    public float sellPercentage;
 
     [Header("Effects")]
     public GameObject buildEffect;
     public float buildEffectDuration;
     public GameObject upgradeEffect;
     public float upgradeEffectDuration;
+    public GameObject sellEffect;
+    public float sellEffectDuration;
 }

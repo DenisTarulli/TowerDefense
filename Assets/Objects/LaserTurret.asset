@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: LaserTurret
   m_EditorClassIdentifier: 
   prefab: {fileID: 567465316471126224, guid: cfb4052abbcd9cb4f866b56d6ec34fcf, type: 3}
-  upgradedPrefab: {fileID: 567465316471126224, guid: cfb4052abbcd9cb4f866b56d6ec34fcf,
+  upgradedPrefab: {fileID: 567465316471126224, guid: a5d6e61253ea73c4793b1cfe3d485f9d,
     type: 3}
+  cost: 350
+  upgradeCost: 600
+  sellPercentage: 0.5
   buildEffect: {fileID: 6063829799591612389, guid: a411ccf69e88a8a4184fb25532c61ce0,
     type: 3}
   buildEffectDuration: 1
   upgradeEffect: {fileID: 6063829799591612389, guid: 1b3fff5e0788b374194afb6abe730bdf,
     type: 3}
   upgradeEffectDuration: 1
-  cost: 350
-  upgradeCost: 600
+  sellEffect: {fileID: 6063829799591612389, guid: 7d03527b447363a42b675ad7421b024b,
+    type: 3}
+  sellEffectDuration: 2

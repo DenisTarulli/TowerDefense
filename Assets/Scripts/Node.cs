@@ -89,12 +89,40 @@ public class Node : MonoBehaviour
 
         turret.GetComponent<Turret>().PartToRotate.rotation = lastLookRotation;
 
-        GameObject buildParticles = Instantiate(currentTurret.upgradeEffect, buildPosition, Quaternion.identity);
-        Destroy(buildParticles, currentTurret.upgradeEffectDuration);
+        GameObject upgradeParticles = Instantiate(currentTurret.upgradeEffect, buildPosition, Quaternion.identity);
+        Destroy(upgradeParticles, currentTurret.upgradeEffectDuration);
 
         isUpgraded = true;
+    }
 
-        Debug.Log("Turret upgraded!");
+    public void SellTurret()
+    {
+        int sellRevenue = GetSellRevenue();
+
+        PlayerStats.Money += sellRevenue;
+
+        GameObject sellParticles = Instantiate(currentTurret.sellEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(sellParticles, currentTurret.sellEffectDuration);
+
+        Destroy(turret);
+        
+        ResetValues();
+    }
+
+    private void ResetValues()
+    {
+        currentTurret = null;
+        isUpgraded = false;
+    }
+
+    public int GetSellRevenue()
+    {
+        int sellRevenue = Mathf.CeilToInt(currentTurret.cost * currentTurret.sellPercentage);
+
+        if (isUpgraded)
+            sellRevenue += Mathf.CeilToInt(currentTurret.upgradeCost * currentTurret.sellPercentage);
+
+        return sellRevenue;
     }
 
     private void OnMouseEnter()

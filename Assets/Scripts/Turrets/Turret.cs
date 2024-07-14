@@ -15,7 +15,9 @@ public class Turret : MonoBehaviour
     [SerializeField] private float slowAmount;
     [SerializeField] private bool useLaser = false;
     [SerializeField] private ParticleSystem impactEffect;
-    private Light impactLight;
+    [SerializeField] private Light impactLight;
+    [SerializeField] private ParticleSystem laserEffect;
+    [SerializeField] private Light laserLight;
     private LineRenderer lineRenderer;
 
     [Header("Setup fields")]
@@ -36,7 +38,7 @@ public class Turret : MonoBehaviour
         if (useLaser)
         {
             lineRenderer = GetComponent<LineRenderer>();
-            impactLight = GetComponentInChildren<Light>();
+            lineRenderer.enabled = false;
         }
 
         InvokeRepeating(nameof(UpdateTarget), 0f, searchTargetRepeatRate);
@@ -51,6 +53,8 @@ public class Turret : MonoBehaviour
                 lineRenderer.enabled = false;
                 impactEffect.Stop();
                 impactLight.enabled = false;
+                laserEffect.Stop();
+                laserLight.enabled = false;
             }
 
             return;
@@ -121,6 +125,9 @@ public class Turret : MonoBehaviour
             lineRenderer.enabled = true;
             impactEffect.Play();
             impactLight.enabled = true;
+
+            laserEffect.Play();
+            laserLight.enabled = true;
         }
 
         lineRenderer.SetPosition(0, firePoint.position);
@@ -129,6 +136,7 @@ public class Turret : MonoBehaviour
         Vector3 direction = firePoint.position - target.position;
         
         impactEffect.transform.SetPositionAndRotation(target.position + direction.normalized * 1.25f, Quaternion.LookRotation(direction));
+        laserEffect.transform.rotation = Quaternion.LookRotation(-direction);
     }
 
     private void Shoot()

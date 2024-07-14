@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: MissileLauncherTurret
   m_EditorClassIdentifier: 
   prefab: {fileID: 2554645346814979459, guid: 51f3b6cd5aa01f74c847ab151583c0a2, type: 3}
-  upgradedPrefab: {fileID: 2554645346814979459, guid: 51f3b6cd5aa01f74c847ab151583c0a2,
+  upgradedPrefab: {fileID: 2554645346814979459, guid: b81d10203d5f8f74c964254983442407,
     type: 3}
+  cost: 250
+  upgradeCost: 500
+  sellPercentage: 0.5
   buildEffect: {fileID: 6063829799591612389, guid: a411ccf69e88a8a4184fb25532c61ce0,
     type: 3}
   buildEffectDuration: 1
   upgradeEffect: {fileID: 6063829799591612389, guid: 1b3fff5e0788b374194afb6abe730bdf,
     type: 3}
   upgradeEffectDuration: 1
-  cost: 250
-  upgradeCost: 500
+  sellEffect: {fileID: 6063829799591612389, guid: 7d03527b447363a42b675ad7421b024b,
+    type: 3}
+  sellEffectDuration: 2

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
@@ -6,11 +7,18 @@ public class Shop : MonoBehaviour
     [SerializeField] private TurretScriptableObject missileLauncherTurret;
     [SerializeField] private TurretScriptableObject laserTurret;
 
+    [SerializeField] private TextMeshProUGUI standardTurretText;
+    [SerializeField] private TextMeshProUGUI missileLauncherTurretText;
+    [SerializeField] private TextMeshProUGUI laserTurretText;
+
     private BuildManager buildManager;
 
     private void Start()
     {
         buildManager = BuildManager.Instance;
+        standardTurretText.text = $"${standardTurret.cost}";
+        missileLauncherTurretText.text = $"${missileLauncherTurret.cost}";
+        laserTurretText.text = $"${laserTurret.cost}";
     }
 
     public void SelectStandardTurret()

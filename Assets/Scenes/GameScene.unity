@@ -2104,6 +2104,9 @@ MonoBehaviour:
   missileLauncherTurret: {fileID: 11400000, guid: 2b20cafb117f6ea44a3bb772f07e034d,
     type: 2}
   laserTurret: {fileID: 11400000, guid: e7ae03c7f772660408eaaf5a08620228, type: 2}
+  standardTurretText: {fileID: 626711816424897450}
+  missileLauncherTurretText: {fileID: 1245381297}
+  laserTurretText: {fileID: 1296696207}
 --- !u!1001 &112341007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10205,6 +10208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 1734136353}
   upgradeCost: {fileID: 119136054}
+  sellRevenue: {fileID: 171121267}
   upgradeButton: {fileID: 24124496}
 --- !u!4 &876528510
 Transform:
@@ -17360,7 +17364,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1527577736}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 876528509}
+        m_TargetAssemblyTypeName: NodeUI, Assembly-CSharp
+        m_MethodName: Sell
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1527577736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17443,7 +17459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43498ff4fa0a6545accc414a62a9d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 99999
+  startingMoney: 10000
   startingLives: 10
 --- !u!1001 &1529752531
 PrefabInstance:
