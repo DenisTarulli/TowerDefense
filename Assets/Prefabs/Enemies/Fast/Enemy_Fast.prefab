@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 738518230406718863}
   - component: {fileID: 3616615519792046788}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_Fast
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 16562e7be285e8b45ba241ea26b5a038, type: 2}
+  - {fileID: 2100000, guid: 12a5f69b30724f748818e5fabcd42ef8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -475,9 +475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfc2c70370a7ae48a8088e62c504684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSpeed: 15
-  maxHealth: 100
-  moneyDropped: 30
+  startingSpeed: 20
+  maxHealth: 70
+  moneyDropped: 15
   deathEffect: {fileID: 2092821897194101133, guid: cd7c15225f07d754b8ea22df325fa5f9,
     type: 3}
   deathEffectDuration: 2
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21aeefad2f8c9a443a0103ab58735e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToPointTolerance: 0.01
+  distanceToPointTolerance: 0.08
 --- !u!1 &5871701526608806429
 GameObject:
   m_ObjectHideFlags: 0

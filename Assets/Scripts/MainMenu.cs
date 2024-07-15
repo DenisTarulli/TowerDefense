@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private string levelToLoad = "MainLevel";
+    [SerializeField] private string levelToLoad;
     [SerializeField] private SceneFader sceneFader;
 
     public void Play()

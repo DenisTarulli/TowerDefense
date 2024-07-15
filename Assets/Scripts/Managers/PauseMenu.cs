@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool gameIsPaused;
+    public static bool GameIsPaused;
 
     [SerializeField] private GameObject ui;
     [SerializeField] private SceneFader sceneFader;
