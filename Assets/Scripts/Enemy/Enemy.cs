@@ -4,10 +4,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float startingSpeed;
     private float moveSpeed;
-    [SerializeField] private float health;
+    [SerializeField] private float maxHealth;
+    private float currentHealth;
     [SerializeField] private int moneyDropped;
     [SerializeField] private GameObject deathEffect;
     [SerializeField] private float deathEffectDuration;
+
+    private EnemyHealthBar healthBar;
 
     private float lifeTime;
     public float LifeTime { get => lifeTime; }
@@ -16,7 +19,12 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        healthBar = GetComponentInChildren<EnemyHealthBar>();
+
         moveSpeed = startingSpeed;
+        currentHealth = maxHealth;
+
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
     private void Update()
@@ -26,9 +34,10 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
+        currentHealth -= amount;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
-        if (health <= 0)
+        if (currentHealth <= 0)
             Die();
     }
 
