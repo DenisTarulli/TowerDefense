@@ -6,6 +6,8 @@ public class WaveSpawner : MonoBehaviour
 {
     public static int EnemiesAlive = 0;
 
+    [SerializeField] private GameManager gameManager;
+
     [SerializeField] private WaveScriptableObject[] waves;
 
     [SerializeField] private Transform spawnPoint;
@@ -30,7 +32,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (waveIndex == waves.Length && EnemiesAlive == 0)
         {
-            Debug.Log("LEVEL COMPLETED");
+            gameManager.WinLevel();
             this.enabled = false;
             return;
         }

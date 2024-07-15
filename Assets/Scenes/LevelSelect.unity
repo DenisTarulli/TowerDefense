@@ -1970,6 +1970,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneFader: {fileID: 1526792734}
+  buttonGrid: {fileID: 1714969374}
+  levelButtons: []
 --- !u!4 &2028075311
 Transform:
   m_ObjectHideFlags: 0

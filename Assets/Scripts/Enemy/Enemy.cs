@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject deathEffect;
     [SerializeField] private float deathEffectDuration;
 
+    private bool isDead;
+
     private EnemyHealthBar healthBar;
 
     private float lifeTime;
@@ -24,6 +26,8 @@ public class Enemy : MonoBehaviour
         moveSpeed = startingSpeed;
         currentHealth = maxHealth;
 
+        isDead = false;
+
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
@@ -37,7 +41,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= amount;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
             Die();
     }
 
@@ -48,6 +52,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        isDead = true;
+
         PlayerStats.Money += moneyDropped;
         WaveSpawner.EnemiesAlive--;
         

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static bool GameIsOver;
 
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject completeLevelUI;
 
     private void Awake()
     {
@@ -32,5 +33,12 @@ public class GameManager : MonoBehaviour
         GameIsOver = true;
 
         gameOverUI.SetActive(true);
+    }
+
+    public void WinLevel()
+    {
+        GameIsOver = true;
+
+        completeLevelUI.SetActive(true);
     }
 }
