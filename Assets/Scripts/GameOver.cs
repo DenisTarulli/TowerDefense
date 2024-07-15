@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI wavesText;
+    [SerializeField] private SceneFader sceneFader;
+    [SerializeField] private string menuSceneName;
 
     private void OnEnable()
     {
@@ -15,11 +15,11 @@ public class GameOver : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
     }
 
     public void Menu()
     {
-        SceneManager.LoadScene("MainMenu");
+        sceneFader.FadeTo(menuSceneName);
     }
 }
