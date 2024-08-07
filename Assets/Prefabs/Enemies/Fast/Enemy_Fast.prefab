@@ -2100,7 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visual: {fileID: 1897924408881691405}
-  distanceToPointTolerance: 0.08
+  distanceToPointTolerance: 0.15
 --- !u!1 &5871701526608806429
 GameObject:
   m_ObjectHideFlags: 0

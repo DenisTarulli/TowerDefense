@@ -10,6 +10,12 @@ public class MainMenu : MonoBehaviour
         sceneFader.FadeTo(levelToLoad);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            PlayerPrefs.SetInt("levelReached", 1);
+    }
+
     public void Quit()
     {
         Application.Quit();
