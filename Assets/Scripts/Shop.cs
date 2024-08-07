@@ -21,6 +21,18 @@ public class Shop : MonoBehaviour
         laserTurretText.text = $"${laserTurret.cost}";
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SelectStandardTurret();
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            SelectMissileLauncherTurret();
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SelectLaserTurret();
+    }
+
     public void SelectStandardTurret()
     {
         buildManager.SelectTurretToBuild(standardTurret);

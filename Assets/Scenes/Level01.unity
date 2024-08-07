@@ -19226,7 +19226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43498ff4fa0a6545accc414a62a9d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 10000
+  startingMoney: 400
   startingLives: 10
 --- !u!1001 &1529752531
 PrefabInstance:
@@ -20074,6 +20074,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27273cc8ceef11643a4350908e5f0823, type: 2}
   - {fileID: 11400000, guid: 92c5b659bfec48d4b9f7722da12219a9, type: 2}
   - {fileID: 11400000, guid: 38634c9e594a5494899c17a18dc42bbe, type: 2}
+  - {fileID: 11400000, guid: f3f5a51f0c874b849afe01257920a21f, type: 2}
+  - {fileID: 11400000, guid: 94cf9869d0fcfa54697ceb12faa9f3d1, type: 2}
   spawnPoint: {fileID: 198251223}
   timeBetweenWaves: 3
   countdown: 10

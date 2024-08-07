@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class Node : MonoBehaviour
 {
     [SerializeField] private Color hoverColor;
-    [SerializeField] private Color notEnoughMoneyHoverColor;
+    [SerializeField] private Color cantBuildColor;
     private Color startingColor;
 
     [SerializeField] private float yPositionOffset;
@@ -66,6 +66,8 @@ public class Node : MonoBehaviour
 
         GameObject buildParticles = Instantiate(turretToBuild.buildEffect, buildPosition, Quaternion.identity);
         Destroy(buildParticles, turretToBuild.buildEffectDuration);
+
+        buildManager.DeselectTurret();
     }
 
     public void UpgradeTurret()
@@ -129,9 +131,14 @@ public class Node : MonoBehaviour
         if (!buildManager.CanBuild || EventSystem.current.IsPointerOverGameObject()) return;
 
         if (buildManager.HasEnoughMoney)
-            meshRend.material.color = hoverColor;
+        {
+            if (turret != null)
+                meshRend.material.color = cantBuildColor;
+            else
+                meshRend.material.color = hoverColor;
+        }            
         else
-            meshRend.material.color = notEnoughMoneyHoverColor;
+            meshRend.material.color = cantBuildColor;
 
     }
 

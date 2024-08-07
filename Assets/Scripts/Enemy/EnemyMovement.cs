@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
@@ -7,6 +5,8 @@ public class EnemyMovement : MonoBehaviour
 {
     private Transform target;
     private int waypointIndex;
+
+    [SerializeField] private Transform visual;
 
     private Enemy enemy;
 
@@ -22,6 +22,7 @@ public class EnemyMovement : MonoBehaviour
         enemy = GetComponent<Enemy>();
 
         target = Waypoints.points[waypointIndex];
+        SetRotation(target.position);
     }
 
     private void Update()
@@ -58,7 +59,15 @@ public class EnemyMovement : MonoBehaviour
 
             target = Waypoints.points[waypointIndex];
         }
+
+        SetRotation(target.position);
     }
+
+    private void SetRotation(Vector3 target)
+    {
+        visual.LookAt(new Vector3(target.x, 0f, target.z));
+    }
+    
 
     private void EndPath()
     {
